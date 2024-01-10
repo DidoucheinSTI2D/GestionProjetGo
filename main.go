@@ -34,7 +34,7 @@ func choixUtilisateur(choix int) {
 	case 2:
 		fonction.VisualiserEvenements(db)
 	case 3:
-		fmt.Println("3")
+		// modification à faire
 	case 4:
 		var eventID int
         fmt.Print("Entrez l'ID de l'événement à supprimer: ")
@@ -44,7 +44,13 @@ func choixUtilisateur(choix int) {
             fmt.Println(err)
         }
 	case 5:
-		fmt.Println("5")
+        var eventID int
+        fmt.Print("Entrez le nom de l'événement à afficher: ")
+        fmt.Scanln(&eventID)
+        err := fonction.AfficherEvenement(db, eventID)
+        if err != nil {
+            fmt.Println(err)
+        }
 	case 6:
 		fmt.Println("Merci de votre visite !")
 		os.Exit(0)

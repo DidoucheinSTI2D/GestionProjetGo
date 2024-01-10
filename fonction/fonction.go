@@ -162,3 +162,21 @@ func SupprimerEvenement(db *sql.DB, eventID int) error {
 
 	return nil
 }
+
+func AfficherEvenement(db *sql.DB, eventID int) error {
+	fmt.Println("--------------------------------------------------------------------------------------------------")
+    row := db.QueryRow("SELECT * FROM events WHERE id = ?", eventID)
+
+    var event Event
+    err := row.Scan(&event.ID, &event.Title, &event.Date, &event.Location, &event.Category, &event.Description)
+    if err != nil {
+        return fmt.Errorf("Erreur lors de la récupération de l'événement: %v", err)
+    }
+
+    fmt.Printf("ID: %d\nTitre: %s\nDate: %s\nLieu: %s\nCatégorie: %s\nDescription: %s\n",
+        event.ID, event.Title, event.Date, event.Location, event.Category, event.Description)
+
+    fmt.Println("--------------------------------------------------------------------------------------------------")
+
+    return nil
+}
